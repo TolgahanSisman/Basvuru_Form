@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>İş Başvuru Formu</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CSS -->
+    <style>
+        body {
+            background-color: #eeeeee;
+        }
+
+        fieldset {
+            background-color: #eeeeee;
+        }
+
+        legend {
+            background-color: gray;
+            color: white;
+            padding: 5px 10px;
+            font-family: serif;
+            font-weight: bold;
+        }
+
+        input {
+            margin: 5px;
+        }
+
+        table {
+            width: 70%;
+        }
+
+        th {
+            height: 50%;
+        }
+    </style>
+
+    <!-- Fonksiyonlar -->
+    <script>
+
+        function baslat() {
+            Gun();
+            Ay();
+            Yil();
+            TecilGun();
+            TecilAy();
+            TecilYil();
+            TerhisGun();
+            TerhisAy();
+            TerhisYil();
+            CocukSayisi();
+            Gizle();
+            Getir();
+            UyrukGizle();
+            uyrukGoster()
+        }
+
+        function Gun() {
+            var start = 1;
+            var end = 31;
+            var options = '" <option value=""disabled selected>Gün</option> "';
+            for (var day = start; day <= end; day++) {
+                options += "<option id=" + day + ">" + day + "</option>";
+            }
+            document.getElementById("gun").innerHTML = options;
+        }
+
+        function Ay() {
+            var start = 1;
+            var end = 12;
+            var options = '" <option value=""disabled selected>Ay</option> "';
+            for (var month = start; month <= end; month++) {
+                options += "<option id=" + month + ">" + month + "</option>";
+            }
+            document.getElementById("ay").innerHTML = options;
+        }
+
+        function Yil() {
+            var start = 1950;
+            var end = (new Date().getFullYear() - 18);
+            var options = '" <option value=""disabled selected>Yıl</option> "';
+            for (var year = start; year <= end; year++) {
+                options += "<option id=" + year + ">" + year + "</option>";
+            }
+            document.getElementById("yil").innerHTML = options;
+        }
+
+        function TecilGun() {
+            var start = 1;
+            var end = 31;
+            var options = '" <option value=""disabled selected>Gün</option> "';
+            for (var day = start; day <= end; day++) {
+                options += "<option id=" + day + ">" + day + "</option>";
+            }
+            document.getElementById("TecilGun").innerHTML = options;
+        }
+
+        function TecilAy() {
+            var start = 1;
+            var end = 12;
+            var options = '" <option value=""disabled selected>Ay</option> "';
+            for (var month = start; month <= end; month++) {
+                options += "<option id=" + month + ">" + month + "</option>";
+            }
+            document.getElementById("TecilAy").innerHTML = options;
+        }
+
+        function TecilYil() {
+            var start = 2022;
+            var end = (new Date().getFullYear() + 29);
+            var options = '" <option value=""disabled selected>Yıl</option> "';
+            for (var year = start; year <= end; year++) {
+                options += "<option id=" + year + ">" + year + "</option>";
+            }
+            document.getElementById("TecilYil").innerHTML = options;
+        }
+
+        function TerhisGun() {
+            var start = 1;
+            var end = 31;
+            var options = '" <option value=""disabled selected>Gün</option> "';
+            for (var day = start; day <= end; day++) {
+                options += "<option id=" + day + ">" + day + "</option>";
+            }
+            document.getElementById("TerhisGun").innerHTML = options;
+        }
+
+        function TerhisAy() {
+            var start = 1;
+            var end = 12;
+            var options = '" <option value=""disabled selected>Ay</option> "';
+            for (var month = start; month <= end; month++) {
+                options += "<option id=" + month + ">" + month + "</option>";
+            }
+            document.getElementById("TerhisAy").innerHTML = options;
+        }
+
+        function TerhisYil() {
+            var start = 1950;
+            var end = (new Date().getFullYear() - 18);
+            var options = '" <option value=""disabled selected>Yıl</option> "';
+            for (var year = start; year <= end; year++) {
+                options += "<option id=" + year + ">" + year + "</option>";
+            }
+            document.getElementById("TerhisYil").innerHTML = options;
+        }
+
+        function Gizle() {
+            document.getElementById("MuhafiyetTablo").style.visibility = "hidden";
+            document.getElementById("TerhisTablo").style.visibility = "hidden";
+            document.getElementById("TecilTablo").style.visibility = "hidden";
+            document.getElementById("TecilTablo2").style.visibility = "hidden";
+            document.getElementById("uyruktb").style.visibility = "hidden";
+        }
+
+        function UyrukGizle() {
+            uyrukSecim = document.getElementById("uyruk").value;
+            if (uyrukSecim == 'tc') {
+                document.getElementById("uyruktb").style.visibility = "hidden";
+            }
+        }
+
+        function UyrukGoster() {
+            document.getElementById("uyruktb").style.visibility = "visible";
+        }
+
+        function Getir() {
+            secim = document.getElementById("AskerlikDurumu").value;
+            if (secim == 'Tamamlandi') {
+                document.getElementById("TecilTablo").style.visibility = "hidden";
+                document.getElementById("TecilTablo2").style.visibility = "hidden";
+                document.getElementById("MuhafiyetTablo").style.visibility = "hidden";
+                document.getElementById("TerhisTablo").style.visibility = "visible";
+            }
+            if (secim == 'Tecilli') {
+                document.getElementById("MuhafiyetTablo").style.visibility = "hidden";
+                document.getElementById("TerhisTablo").style.visibility = "hidden";
+                document.getElementById("TecilTablo").style.visibility = "visible";
+                document.getElementById("TecilTablo2").style.visibility = "visible";
+            }
+            if (secim == 'Muaf') {
+                document.getElementById("TerhisTablo").style.visibility = "hidden";
+                document.getElementById("TecilTablo").style.visibility = "hidden";
+                document.getElementById("TecilTablo2").style.visibility = "hidden";
+                document.getElementById("MuhafiyetTablo").style.visibility = "visible";
+            }
+        }
+
+        function CocukSayisi() {
+            var start = 1;
+            var end = 30;
+            var options = '" <option value=""disabled selected></option> "';
+            for (var sayi = start; sayi <= end; sayi++) {
+                options += "<option id=" + sayi + ">" + sayi + "</option>";
+            }
+            document.getElementById("cocuksayisi").innerHTML = options;
+        }
+        var d = 1;
+        function DilEkle() {
+            var table = document.getElementById("DilTable");
+            var satirSayisi = table.rows.length - 1;
+            var row = table.insertRow(satirSayisi);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = '<input type="text" name="Diller' + d + '" id="Diller' + d + '">';
+
+            cell2.innerHTML = '<select name="OkumaDilBilgisi' + d + '" id="OkumaDilBilgisi' + d + '"><option value="" disabled selected></option><option value="OkumaDilOrta">Orta</option><option value="OkumaDilIyi">İyi</option><option value="OkumaDilCokIyi">Çok İyi</option></select>'
+
+            cell3.innerHTML = '<select name="YazmaDilBilgisi' + d + '" id="YazmaDilBilgisi' + d + '"><option value="" disabled selected></option><option value="YazmaDilOrta">Orta</option><option value="YazmaDilIyi">İyi</option><option value="YazmaDilCokIyi">Çok İyi</option></select>'
+
+            cell4.innerHTML = '<select name="KonusmaDilBilgisi' + d + '" id="KonusmaDilBilgisi' + d + '"><option value="" disabled selected></option><option value="KonusmaDilOrta">Orta</option><option value="KonusmaDilIyi">İyi</option><option value="KonusmaDilCokIyi">Çok İyi</option></select>'
+
+            d++;
+        }
+        var p = 1;
+        function PCBilgisiEkle() {
+            var table = document.getElementById("PcTable");
+            var satirSayisi = table.rows.length - 1;
+            var row = table.insertRow(satirSayisi);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = '<input type="text" name="PCBilgi' + p + '" id="PCBilgi' + p + '">';
+            cell2.innerHTML = '<select name="BilgisayarBilgisi' + p + '" id="BilgisayarBilgisi' + p + '"><option value=""disabled selected><option value="PcAz">Az</option></option><option value="PcOrta">Orta</option><option value="PcIyi">İyi</option><option value="PcCokIyi">Çok İyi</option></select>';
+            p++;
+        }
+        var i = 1;
+        function OkulEkle() {
+            var table = document.getElementById("OkulTable");
+            var satirSayisi = table.rows.length - 1;
+            var row = table.insertRow(satirSayisi);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+
+            cell1.innerHTML = '<select name="ogrenimdurumu' + i + '" id="ogrenimdurumu' + i + '"><option value="" disabled selected></option><option value="ilkogretim">İlköğretim</option><option value="lise">Lise</option><option value="onlisans">Önlisans</option><option value="lisans">Lisans</option><option value="ylisans">Y. Lisans</option><option value="doktora">Doktora</option></select>'
+            cell2.innerHTML = '<input type="text" name="okuladi' + i + '" id="okuladi' + i + '">'
+            cell3.innerHTML = '<input type="text" name="okulbolumu' + i + '" id="okulbolumu' + i + '">'
+            cell4.innerHTML = '<input type="text" name="okulbaslangic' + i + '" id="okulbaslangic' + i + '">'
+            cell5.innerHTML = '<input type="text" name="okulbitis' + i + '" id="okulbitis' + i + '">'
+            cell6.innerHTML = '<input type="text" name="okulderece' + i + '" id="okulderece' + i + '">'
+
+
+            i++;
+        }
+
+    </script>
+
+
+</head>
+
+<body onload="baslat()">
+    <form action="http://localhost/index/isbasvuru/baglan.php" method="POST">
+
+
+        <br>
+        <!-- Kişisel Bilgiler -->
+        <fieldset align="center">
+            <table id="myTable" border="1" align="center">
+                <legend align="center">A. Kişisel Bilgiler</legend>
+
+                <tr>
+                    <th>Fotoğraf</th>
+                    <td colspan="3"><input type="file" id="fotograf" name="fotograf" accept="image/png, image/jpeg">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>Adı</th>
+                    <td><input type="text" id="Ad" name="Ad" required></td>
+                    <th>Soyadı</th>
+                    <td><input type="text" id="Soyad" name="Soyad" required></td>
+                </tr>
+
+                <tr>
+                    <th>Doğum Yeri</th>
+                    <td>
+                        <select name="DogumYeri" id="DogumYeri" required>
+                            <option value="" disabled selected></option>
+                            <option value="Adana">Adana</option>
+                            <option value="Adıyaman">Adıyaman</option>
+                            <option value="Afyonkarahisar">Afyonkarahisar</option>
+                            <option value="Ağrı">Ağrı</option>
+                            <option value="Amasya">Amasya</option>
+                            <option value="Ankara">Ankara</option>
+                            <option value="Antalya">Antalya</option>
+                            <option value="Artvin">Artvin</option>
+                            <option value="Aydın">Aydın</option>
+                            <option value="Balıkesir">Balıkesir</option>
+                            <option value="Bilecik">Bilecik</option>
+                            <option value="Bingöl">Bingöl</option>
+                            <option value="Bitlis">Bitlis</option>
+                            <option value="Bolu">Bolu</option>
+                            <option value="Burdur">Burdur</option>
+                            <option value="Bursa">Bursa</option>
+                            <option value="Çanakkale">Çanakkale</option>
+                            <option value="Çankırı">Çankırı</option>
+                            <option value="Çorum">Çorum</option>
+                            <option value="Denizli">Denizli</option>
+                            <option value="Diyarbakır">Diyarbakır</option>
+                            <option value="Edirne">Edirne</option>
+                            <option value="Elazığ">Elazığ</option>
+                            <option value="Erzincan">Erzincan</option>
+                            <option value="Erzurum">Erzurum</option>
+                            <option value="Eskişehir">Eskişehir</option>
+                            <option value="Gaziantep">Gaziantep</option>
+                            <option value="Giresun">Giresun</option>
+                            <option value="Gümüşhane">Gümüşhane</option>
+                            <option value="Hakkâri">Hakkâri</option>
+                            <option value="Hatay">Hatay</option>
+                            <option value="Isparta">Isparta</option>
+                            <option value="Mersin">Mersin</option>
+                            <option value="İstanbul">İstanbul</option>
+                            <option value="İzmir">İzmir</option>
+                            <option value="Kars">Kars</option>
+                            <option value="Kastamonu">Kastamonu</option>
+                            <option value="Kayseri">Kayseri</option>
+                            <option value="Kırklareli">Kırklareli</option>
+                            <option value="Kırşehir">Kırşehir</option>
+                            <option value="Kocaeli">Kocaeli</option>
+                            <option value="Konya">Konya</option>
+                            <option value="Kütahya">Kütahya</option>
+                            <option value="Malatya">Malatya</option>
+                            <option value="Manisa">Manisa</option>
+                            <option value="Kahramanmaraş">Kahramanmaraş</option>
+                            <option value="Mardin">Mardin</option>
+                            <option value="Muğla">Muğla</option>
+                            <option value="Muş">Muş</option>
+                            <option value="Nevşehir">Nevşehir</option>
+                            <option value="Niğde">Niğde</option>
+                            <option value="Ordu">Ordu</option>
+                            <option value="Rize">Rize</option>
+                            <option value="Sakarya">Sakarya</option>
+                            <option value="Samsun">Samsun</option>
+                            <option value="Siirt">Siirt</option>
+                            <option value="Sinop">Sinop</option>
+                            <option value="Sivas">Sivas</option>
+                            <option value="Tekirdağ">Tekirdağ</option>
+                            <option value="Tokat">Tokat</option>
+                            <option value="Trabzon">Trabzon</option>
+                            <option value="Tunceli">Tunceli</option>
+                            <option value="Şanlıurfa">Şanlıurfa</option>
+                            <option value="Uşak">Uşak</option>
+                            <option value="Van">Van</option>
+                            <option value="Yozgat">Yozgat</option>
+                            <option value="Zonguldak">Zonguldak</option>
+                            <option value="Aksaray">Aksaray</option>
+                            <option value="Bayburt">Bayburt</option>
+                            <option value="Karaman">Karaman</option>
+                            <option value="Kırıkkale">Kırıkkale</option>
+                            <option value="Batman">Batman</option>
+                            <option value="Şırnak">Şırnak</option>
+                            <option value="Bartın">Bartın</option>
+                            <option value="Ardahan">Ardahan</option>
+                            <option value="Iğdır">Iğdır</option>
+                            <option value="Yalova">Yalova</option>
+                            <option value="Karabük">Karabük</option>
+                            <option value="Kilis">Kilis</option>
+                            <option value="Osmaniye">Osmaniye</option>
+                            <option value="Düzce">Düzce</option>
+                        </select>
+                    </td>
+                    <th>Doğum Tarihi</th>
+                    <td>
+                        <select name="gun" id="gun" required onload="Gun()"></select>
+                        <select name="ay" id="ay" required onload="Ay()"></select></select>
+                        <select name="yil" id="yil" required onload="Yil()"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Cinsiyet</th>
+                    <td colspan="3">
+                        <input type="radio" name="cinsiyet" value="erkek"> Erkek</input>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <input type="radio" name="cinsiyet" value="kadin"> Kadın</input>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Uyruğunuz</th>
+                    <td colspan="2">
+                        <input type="radio" id="uyruk" name="uyruk" value="tc" onclick="UyrukGizle()">T.C </input>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <input type="radio" id="uyruk" name="uyruk" value="diger" onclick="UyrukGoster()">Diğer </input>
+                    <td id="uyruktb">
+                        Diğer <select name="uyruk" id="uyruk">
+                            <option value="" disabled selected></option>
+                            <option value="ABD Virgin Adaları">ABD Virgin Adaları</option>
+                            <option value="Almanya">Almanya</option>
+                            <option value="Amerika Birleşik Devletleri">Amerika Birleşik Devletleri</option>
+                            <option value="Andorra">Andorra</option>
+                            <option value="Antigua ve Barbuda">Antigua ve Barbuda</option>
+                            <option value="Arjantin">Arjantin</option>
+                            <option value="Arnavutluk">Arnavutluk</option>
+                            <option value="Aruba">Aruba</option>
+                            <option value="Avustralya">Avustralya</option>
+                            <option value="Avusturya">Avusturya</option>
+                            <option value="Azerbaycan">Azerbaycan</option>
+                            <option value="Bahama">Bahama</option>
+                            <option value="Bahamas">Bahamas</option>
+                            <option value="Bahreyn">Bahreyn</option>
+                            <option value="Bangladeş">Bangladeş</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belçika">Belçika</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Beyaz Rusya">Beyaz Rusya</option>
+                            <option value="Birleşik Arap Emirlikleri">Birleşik Arap Emirlikleri</option>
+                            <option value="Bolivya">Bolivya</option>
+                            <option value="Bosna Hersek">Bosna Hersek</option>
+                            <option value="Brezilya">Brezilya</option>
+                            <option value="Brunei">Brunei</option>
+                            <option value="Bulgaristan">Bulgaristan</option>
+                            <option value="Burma">Burma</option>
+                            <option value="Cebelitarık">Cebelitarık</option>
+                            <option value="Çek Cumhuriyeti">Çek Cumhuriyeti</option>
+                            <option value="Çin">Çin</option>
+                            <option value="Danimarka">Danimarka</option>
+                            <option value="Dominik Cumhuriyeti">Dominik Cumhuriyeti</option>
+                            <option value="Ekvator">Ekvator</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Endonezya">Endonezya</option>
+                            <option value="Eritre">Eritre</option>
+                            <option value="Ermenistan">Ermenistan</option>
+                            <option value="Estonya">Estonya</option>
+                            <option value="Fas">Fas</option>
+                            <option value="Fiji">Fiji</option>
+                            <option value="Filipinler">Filipinler</option>
+                            <option value="Finlandiya">Finlandiya</option>
+                            <option value="Fransa">Fransa</option>
+                            <option value="Fransız Polinezyası">Fransız Polinezyası</option>
+                            <option value="Grenada">Grenada</option>
+                            <option value="Guadalup">Guadalup</option>
+                            <option value="Guam">Guam</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Güney Afrika">Güney Afrika</option>
+                            <option value="Gürcistan">Gürcistan</option>
+                            <option value="Hırvatistan">Hırvatistan</option>
+                            <option value="Hindistan">Hindistan</option>
+                            <option value="Hollanda">Hollanda</option>
+                            <option value="Hollanda Antilleri">Hollanda Antilleri</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="İngiliz Virginia Adaları">İngiliz Virginia Adaları</option>
+                            <option value="İngiltere">İngiltere</option>
+                            <option value="İrlanda">İrlanda</option>
+                            <option value="İspanya">İspanya</option>
+                            <option value="İsrail">İsrail</option>
+                            <option value="İsveç">İsveç</option>
+                            <option value="İsviçre">İsviçre</option>
+                            <option value="İtalya">İtalya</option>
+                            <option value="İzlanda">İzlanda</option>
+                            <option value="Jamaika">Jamaika</option>
+                            <option value="Japonya">Japonya</option>
+                            <option value="Kamboçya">Kamboçya</option>
+                            <option value="Kanada">Kanada</option>
+                            <option value="Katar">Katar</option>
+                            <option value="Kayman Adaları">Kayman Adaları</option>
+                            <option value="Kıbrıs">Kıbrıs</option>
+                            <option value="Kolombiya">Kolombiya</option>
+                            <option value="Kore">Kore</option>
+                            <option value="Kosta Rika">Kosta Rika</option>
+                            <option value="Kuveyt">Kuveyt</option>
+                            <option value="Küba">Küba</option>
+                            <option value="Letonya">Letonya</option>
+                            <option value="Liechtenstein">Liechtenstein</option>
+                            <option value="Litvanya">Litvanya</option>
+                            <option value="Lübnan">Lübnan</option>
+                            <option value="Lüksemburg">Lüksemburg</option>
+                            <option value="Macaristan">Macaristan</option>
+                            <option value="Makedonya">Makedonya</option>
+                            <option value="Maldivler">Maldivler</option>
+                            <option value="Malezya">Malezya</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Meksika">Meksika</option>
+                            <option value="Mısır">Mısır</option>
+                            <option value="Moldova">Moldova</option>
+                            <option value="Monako">Monako</option>
+                            <option value="Mozambik">Mozambik</option>
+                            <option value="Nikaragua">Nikaragua</option>
+                            <option value="Norveç">Norveç</option>
+                            <option value="Özbekistan">Özbekistan</option>
+                            <option value="Panama">Panama</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Polonya">Polonya</option>
+                            <option value="Portekiz">Portekiz</option>
+                            <option value="Porto Riko">Porto Riko</option>
+                            <option value="Romanya">Romanya</option>
+                            <option value="Rusya">Rusya</option>
+                            <option value="Saint Kitts ve Nevis">Saint Kitts ve Nevis</option>
+                            <option value="Saint Lucia">Saint Lucia</option>
+                            <option value="San Marino">San Marino</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Seyşel">Seyşel</option>
+                            <option value="Singapur">Singapur</option>
+                            <option value="Slovakya">Slovakya</option>
+                            <option value="Slovenya">Slovenya</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Suriye">Suriye</option>
+                            <option value="Suudi Arabistan">Suudi Arabistan</option>
+                            <option value="Şili">Şili</option>
+                            <option value="Tayland">Tayland</option>
+                            <option value="Tayvan">Tayvan</option>
+                            <option value="Tunus">Tunus</option>
+                            <option value="Turks ve Caicos Adaları">Turks ve Caicos Adaları</option>
+                            <option value="Ukrayna">Ukrayna</option>
+                            <option value="Umman">Umman</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Ürdün">Ürdün</option>
+                            <option value="Vanuatu">Vanuatu</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="Yeni Zelanda">Yeni Zelanda</option>
+                            <option value="Yunanistan">Yunanistan</option>
+                        </select>
+                    </td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>E-Mail</th>
+                    <td colspan="3"><input type="text" id="mail" name="mail" size="70"
+                            placeholder="                                                             @           "
+                            required></td>
+                </tr>
+                <tr>
+                    <th>Ev Telefonu</th>
+                    <td>
+                        <input type="tel0" id="telno0" name="telno0" size="30" placeholder="0212-456-78-90">
+                    </td>
+                    <th>Cep Telefonu</th>
+                    <td>
+                        <input type="tel1" id="telno1" name="telno1" size="30" placeholder="0530-456-78-90">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>İkametgah Adresi</th>
+                    <td colspan="3">
+                        <textarea name="adres" id="adres" cols="75" rows="3" style="resize: none;"
+                            placeholder="Adresinizi Giriniz.."></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th rowspan="3" style="width: 50%;">Askerlik Durumu</th>
+                    <td rowspan="3">
+                        <select name="AskerlikDurumu" id="AskerlikDurumu" onchange="Getir()">
+                            <option value="" disabled selected></option>
+                            <option value="Tamamlandi">Tamamlandı</option>
+                            <option value="Tecilli">Tecilli</option>
+                            <option value="Muaf">Muaf</option>
+                        </select>
+                    </td>
+
+                    <th id="TecilTablo" style="width: 50%;"> Son Tecil Tarihi</th>
+                    <td id="TecilTablo2">
+                        <select name="TecilGun" id="TecilGun" onload="TecilGun()"></select>
+                        <select name="TecilAy" id="TecilAy" onload="TecilAy()"></select>
+                        <select name="TecilYil" id="TecilYil" onload="TecilYil()"></select>
+                    </td>
+                </tr>
+
+                <tr id="TerhisTablo">
+                    <th style="width: 50%;"> Terhis Tarihi</th>
+                    <td>
+                        <select name="TerhisGun" id="TerhisGun" onload="TerhisGun()"></select>
+                        <select name="TerhisAy" id="TerhisAy" onload="TerhisAy()"></select>
+                        <select name="TerhisYil" id="TerhisYil" onload="TerhisYil()"></select>
+                    </td>
+                </tr>
+
+                <tr id="MuhafiyetTablo">
+                    <th style="width: 50%;">Muafiyet Nedeni</th>
+                    <td>
+                        <textarea placeholder="Muafiyet Nedeninizi giriniz.." style="resize: none;"
+                            name="MuafiyetNedeni" id="MuafiyetNedeni" cols="75" rows="3"></textarea>
+                    </td>
+                </tr>
+                </tr>
+
+                <tr>
+                    <th>Medeni Hal</th>
+                    <td>
+                        &emsp;
+                        <input type="radio" name="medenihal" value="evli"> Evli</input>
+                        &emsp;
+                        <input type="radio" name="medenihal" value="bekar"> Bekar</input>
+                    </td>
+
+                    <th>Çocuk Sayısı</th>
+                    <td>
+                        <select name="cocuksayisi" id="cocuksayisi" onload="CocukSayisi()"></select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Sigara Kullanıyor Musunuz</th>
+                    <td>
+                        &emsp;
+                        <input type="radio" name="sigara" id="sigara" value="Evet">Evet
+                        &emsp;
+                        <input type="radio" name="sigara" id="sigara" value="Hayır">Hayır
+                    </td>
+                    <th>Eşinizin Mesleği</th>
+                    <td>
+                        <input type="text" name="esmeslek" id="esmeslek">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sürücü Belgesi</th>
+                    <td colspan="3">
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="b">B</input>&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="c">C</input>&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="d">D</input>&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="e">E</input>&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="f">F</input>&emsp;&emsp;&emsp;
+                        <input type="checkbox" name="ehliyet" value="yok">Yok</input>&emsp;&emsp;
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <!-- Eğitim Bilgileri -->
+        <fieldset align="center">
+            <table id="OkulTable" border="1" align="center">
+                <legend align="center">B. Eğitim Bilgileri</legend>
+                <tr>
+                    <th></th>
+                    <th>Okul Adı</th>
+                    <th>Bölümü</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                    <th>Mezuniyet Derecesi</th>
+                </tr>
+
+                <tr>
+                    <td><select name="ogrenimdurumu" id="ogrenimdurumu">
+                            <option value="" disabled selected></option>
+                            <option value="ilkogretim">İlköğretim</option>
+                            <option value="lise">Lise</option>
+                            <option value="onlisans">Önlisans</option>
+                            <option value="lisans">Lisans</option>
+                            <option value="ylisans">Y. Lisans</option>
+                            <option value="doktora">Doktora</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input type="text" name="okuladi" id="okuladi">
+                    </td>
+
+                    <td>
+                        <input type="text" name="okulbolumu" id="okulbolumu">
+                    </td>
+
+                    <td>
+                        <input type="text" name="okulbaslangic" id="okulbaslangic">
+                    </td>
+
+                    <td>
+                        <input type="text" name="okulbitis" id="okulbitis">
+                    </td>
+
+                    <td>
+                        <input type="text" name="okulderece" id="okulderece">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="6" align="center"><button type="button" class="btn btn-info" onclick="OkulEkle()">Okul
+                            Ekle (+)</button></td>
+                </tr>
+
+
+            </table>
+        </fieldset>
+        <br>
+        <!-- Yabancı Dil Bilgiler -->
+        <fieldset align="center">
+            <table id="DilTable" border="1" align="center">
+                <legend>C. Yabancı Dil Bilgisi</legend>
+                <tr>
+                    <th>Dil</th>
+                    <th>Okuma</th>
+                    <th>Yazma</th>
+                    <th>Konuşma</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="text" name="Diller0" id="Diller0">
+                    </td>
+
+                    <td>
+                        <select name="OkumaDilBilgisi0" id="OkumaDilBilgisi0">
+                            <option value="" disabled selected></option>
+                            <option value="OkumaDilOrta">Orta</option>
+                            <option value="OkumaDilIyi">İyi</option>
+                            <option value="OkumaDilCokIyi">Çok İyi</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select name="YazmaDilBilgisi0" id="YazmaDilBilgisi0">
+                            <option value="" disabled selected></option>
+                            <option value="YazmaDilOrta">Orta</option>
+                            <option value="YazmaDilIyi">İyi</option>
+                            <option value="YazmaDilCokIyi">Çok İyi</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select name="KonusmaDilBilgisi0" id="KonusmaDilBilgisi0">
+                            <option value="" disabled selected></option>
+                            <option value="KonusmaDilOrta">Orta</option>
+                            <option value="KonusmaDilIyi">İyi</option>
+                            <option value="KonusmaDilCokIyi">Çok İyi</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        <button type="button" class="btn btn-info" onclick="DilEkle()">Dil Ekle (+)</button>
+                    </td>
+                </tr>
+
+            </table>
+
+        </fieldset>
+        <br>
+        <!-- Bilgisayar Bilgileri -->
+        <fieldset align="center">
+            <table id="PcTable" border="1" align="center">
+                <legend>D. Bilgisayar Bilgisi</legend>
+                <tr>
+                    <th>Bilgisayar Bilgisi</th>
+                    <th>Seviyesi</th>
+                <tr>
+                    <td><input type="text" name="PCBilgi0" id="PCBilgi0"></td>
+                    <td>
+                        <select name="BilgisayarBilgisi0" id="BilgisayarBilgisi0">
+                            <option value="" disabled selected></option>
+                            <option value="PcAz">Az</option>
+                            <option value="PcOrta">Orta</option>
+                            <option value="PcIyi">İyi</option>
+                            <option value="PcCokIyi">Çok İyi</option>
+                        </select>
+                    </td>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button type="button" class="btn btn-info" onclick="PCBilgisiEkle()">Bilgisayar Bilgisi Ekle
+                            (+)</button>
+                    </td>
+                </tr>
+                </tr>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <!-- Başvur Butonu -->
+        <table align="center">
+            <tr>
+                <td colspan="5" align="center"><button type="submit" class="btn btn-success">Başvur !</button>
+                </td>
+            </tr>
+        </table>
+        <br>
+    </form>
+
+</body>
+
+</html>
